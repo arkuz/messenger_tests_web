@@ -1,0 +1,56 @@
+image: python:3.7
+
+stages:
+  - test
+
+test:
+  stage: test
+
+  services:
+    #- name: selenium/standalone-firefox
+    - name: selenium/standalone-chrome
+
+  before_script:
+    # Установка окружения
+    - echo "Install environment"
+    - apt-get update -q -y
+    - pip3 install -r requirements.txt
+
+    # скачиваем и подготавливаем к работе webdriver firefox
+    #- echo "Get geckodriver"
+    #- wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+    #- tar -xvzf geckodriver-v0.26.0-linux64.tar.gz
+    #- chmod +x geckodriver
+
+    # скачиваем и подготавливаем к работе webdriver chrome
+    - echo "Get chromdriver"
+    - wget https://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
+    - unzip chromedriver_linux64.zip
+    - chmod +x chromedriver
+
+     # подменяем аккаунты в конфиге для запуска в gitlab
+    - echo "Changed users"
+    - python3 "./scripts/change_users_for_gitlab_runner.py"
+
+    # удаляем все команды пользователей
+    - echo "Clear teams for all users"
+    - python3 "./scripts/clear_all_users.py"
+
+  script:
+    - echo "Run all tests"
+    - echo "1" > exit_code.txt
+    - pytest -s -vv --html=report/report.html --self-contained-html "./tests"
+    - echo "0" > exit_code.txt
+
+  after_script:
+    # Отправка отчетов о тестах в группу
+    - echo "Send report to chat"
+    - EXIT_CODE=$(cat exit_code.txt)
+    - python3 ./scripts/send_tests_report.py $CI_JOB_ID $EXIT_CODE
+
+  artifacts:
+    when: always
+    paths:
+      - $CI_PROJECT_DIR/report
+      - $CI_PROJECT_DIR/exit_code.txt
+    expire_in: 1 month

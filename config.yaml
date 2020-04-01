@@ -1,0 +1,104 @@
+api:
+  url: "https://hostname/api/v3"
+
+web:
+  site_url: "https://hostname"
+  implicitly_wait: '10'
+
+  env: 'gitlab' # local or any text
+  browser: 'Chrome' # Chrome or Firefox
+  browser_mode: 'default' # headless or any text
+
+  local_url: "http://localhost:4444/wd/hub"
+  gitlab_chrome_url: "http://selenium__standalone-chrome:4444/wd/hub"
+  gitlab_firefox_url: "http://selenium__standalone-firefox:4444/wd/hub"
+
+
+users:
+  user1:
+    phone: "+79033333331"
+    code: "11111"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for autotest, main account"
+
+  user2:
+    phone: "+79033333332"
+    code: "22222"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for autotest, invated admin"
+
+  user3:
+    phone: "+79033333334"
+    code: "44444"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for autotest, invated member"
+
+  user4:
+    phone: "+79033333335"
+    code: "55555"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for autotest, outsider"
+
+  user5:
+    phone: "+79011111111"
+    code: "11111"
+    device_id: "aI5Edl5ZwggA4CDU"
+    type: "web"
+    token: "BoEQk_cLLVa2BaPIB1XAZZ1o5OQ8Hv3k"
+    description: "for dev"
+
+  user6:
+    phone: "+79033333333"
+    code: "33333"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for dev"
+
+  user7:
+    phone: "+79055555555"
+    code: "55555"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for dev"
+
+  user8:
+    phone: "+79033333887"
+    code: "77777"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for gitlab GUI, main account"
+
+  user9:
+    phone: "+79033333888"
+    code: "88888"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for gitlab GUI, invated admin"
+
+  user10:
+    phone: "+79033333389"
+    code: "99999"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for gitlab GUI, invated member"
+
+  user11:
+    phone: "+79033333380"
+    code: "00000"
+    device_id: ""
+    type: ""
+    token: ""
+    description: "for gitlab GUI, outsider"
